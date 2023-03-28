@@ -18,5 +18,12 @@ public class servlet extends HttpServlet {
         System.out.println("request = " + request);
         System.out.println("response = " + response);
 
+        String username = request.getParameter("username");
+        System.out.println("username = " + username);
+
+        response.setContentType("text/plain");              //Context type에 들어간다
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write("hello "+username);   //response의 getWriter 메서드 = > HTTP body 에 메세지가 들어간다.
+
     }
 }
