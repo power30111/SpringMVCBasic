@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hello.itemService.domain.item.ItemRepositoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-04-05T04:51:05" hostname="DESKTOP-FF7M6H5" time="0.093">
+  <properties/>
+  <testcase name="findAll()" classname="hello.itemService.domain.item.ItemRepositoryTest" time="0.085"/>
+  <testcase name="updateItem()" classname="hello.itemService.domain.item.ItemRepositoryTest" time="0.003"/>
+  <testcase name="save()" classname="hello.itemService.domain.item.ItemRepositoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
