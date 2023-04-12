@@ -2,6 +2,7 @@ package hello.itemservice.domain.item;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,7 @@ public class Item {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "공백X")
     private String itemName;
 
     @NotNull

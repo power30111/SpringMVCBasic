@@ -6,13 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,9 +40,17 @@ public class ValidationItemControllerV3 {
         model.addAttribute("item", new Item());
         return "validation/v3/addForm";
     }
+
     @PostMapping("/add")
     public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
+        
+        //특정 필드가 아닌 복합 룰 검증
+        if (item.getPrice() != null && item.getQuantity() != null){
+            int result = item.getPrice() * item.getQuantity();
+            if (result < 10000){
+                bindingResult.reject("totalPriceMin",new Object[]{10000,result},null);
+            }
+        }
         //검증에 실패시 다시 입력 폼으로
         if (bindingResult.hasErrors()){ //에러가 있다면
             log.info("errors = {}",bindingResult);
@@ -69,7 +72,19 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute Item item,BindingResult bindingResult) {
+
+        if (item.getPrice() != null && item.getQuantity() != null){
+            int result = item.getPrice() * item.getQuantity();
+            if (result < 10000){
+                bindingResult.reject("totalPriceMin",new Object[]{10000,result},null);
+            }
+        }
+        if(bindingResult.hasErrors()){
+            log.info("errors={}",bindingResult);
+            return "validation/v3/editForm";
+        }
+
         itemRepository.update(itemId, item);
         return "redirect:/validation/v3/items/{itemId}";
     }
