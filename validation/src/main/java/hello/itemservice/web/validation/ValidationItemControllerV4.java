@@ -61,6 +61,7 @@ public class ValidationItemControllerV4 {
             return "validation/v4/addForm";
         }
         //성공 로직일 경우에는 Item 생성해서 Item 객체에 맞게끔 넣는다.
+        //성공 안할경우 아예 객체생성 x
         Item item = new Item();
         item.setItemName(form.getItemName());
         item.setPrice(form.getPrice());
