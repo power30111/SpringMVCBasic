@@ -29,6 +29,7 @@ public class TestDataInit {
         member.setName("teeter");
 
         memberRepository.save(member);
+        // domain, web 의존 분리
     }
 
 }
