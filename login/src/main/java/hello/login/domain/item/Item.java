@@ -10,6 +10,8 @@ public class Item {
     private Integer price;
     private Integer quantity;
 
+
+
     public Item() {
     }
 
@@ -17,5 +19,8 @@ public class Item {
         this.itemName = itemName;
         this.price = price;
         this.quantity = quantity;
+
     }
+
+
 }
